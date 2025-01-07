@@ -27,8 +27,8 @@ The HTML file includes:
     - **Date of Birth**
     - **Gender**
     - **Phone Number**
-    - **Order Type** (checkboxes for "Shawarma," "Zinger," "Burger")
-    - **Order Option** (radio buttons for "Combo" or "Sandwich")
+    - **Order Type** 
+    - **Order Option** 
   - A space for rendering customer cards dynamically.
 - A **Footer**:
   - Provides a styled closing section for the webpage.
