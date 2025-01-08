@@ -45,13 +45,11 @@ form.addEventListener('submit', function render(event) {
         return;
     }
 
-    let arr = [orderType, orderOption];
-    localStorage.setItem('Order', arr);
-
     const customers = new Customer(
         fullName,
         password,
         dob,
+        email,
         gender,
         orderType,
         orderOption,
@@ -59,13 +57,31 @@ form.addEventListener('submit', function render(event) {
         phoneNumber
     );
 
-    renderCard(customers);
+    let customerOrder = [
+
+        customers.fullName,
+        customers.password,
+        customers.dob,
+        customers.email,
+        customers.gender,
+        customers.orderType,
+        customers.orderOption,
+        customers.imageUrl,
+        customers.phoneNumber
+    ];
+
+    localStorage.setItem('Order', JSON.stringify(customerOrder));
+
+    const customerInfo = JSON.parse(localStorage.getItem('Order'));
+
+     renderCard(customerInfo);
 });
 
-function Customer(fullName, password, dob, gender, orderType, orderOption, imageUrl, phoneNumber) {
+function Customer(fullName, password, dob, email, gender, orderType, orderOption, imageUrl, phoneNumber) {
     this.fullName = fullName;
     this.password = password;
     this.dob = dob;
+    this.email = email;
     this.gender = gender;
     this.orderType = orderType;
     this.orderOption = orderOption;
@@ -73,14 +89,15 @@ function Customer(fullName, password, dob, gender, orderType, orderOption, image
     this.phoneNumber = phoneNumber;
 }
 
+
 function renderCard(customer) {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-        <img src="${customer.imageUrl}" alt="${customer.fullName}">
-        <p>Full name: ${customer.fullName}</p>
-        <p>Password: ${'*'.repeat(customer.password.length)}</p>
-        <p>Date of Birth: ${customer.dob}</p>
+        <img src="${customer[7]}" alt="${customer[0]}">
+        <p>Full name: ${customer[0]}</p>
+        <p>Password: ${'*'.repeat(customer[1].length)}</p>
+        <p>Date of Birth: ${customer[2]}</p>
     `;
     cardsContainer.appendChild(card);
 }
